@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy — Spendly{% endblock %}
+
+{% block content %}
+
+<section class="legal-page">
+    <div class="legal-inner">
+
+        <div class="legal-header">
+            <a href="{{ url_for('landing') }}" class="legal-back">← Back to home</a>
+            <div class="legal-eyebrow">Legal</div>
+            <h1 class="legal-title">Privacy Policy</h1>
+            <p class="legal-updated">Last updated · August 27, 2026</p>
+        </div>
+
+        <p class="legal-intro">
+            Your privacy matters. This policy explains what information Spendly
+            collects, how we use it, and the choices you have. We keep things simple —
+            you own your data, and we treat it with respect.
+        </p>
+
+        <div class="legal-section">
+            <div class="legal-icon"><span class="legal-section-icon">◉</span></div>
+            <div class="legal-section-content">
+                <h2 class="legal-section-title">1. Data We Collect</h2>
+                <div class="legal-section-body">
+                    <p>
+                        To provide Spendly's expense tracking features, we collect a small
+                        amount of information from you. This includes the account
+                        information you provide when registering (such as your name and
+                        email address) and the financial entries you create inside the
+                        app — amounts, categories, dates, and descriptions.
+                    </p>
+                    <p>
+                        We also log basic technical data like your IP address, browser
+                        type, and timestamps of activity. This helps us keep the service
+                        secure and diagnose issues when they arise. We do not collect any
+                        data we do not need to operate Spendly.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="legal-section">
+            <div class="legal-icon"><span class="legal-section-icon">◈</span></div>
+            <div class="legal-section-content">
+                <h2 class="legal-section-title">2. How We Use Your Data</h2>
+                <div class="legal-section-body">
+                    <p>
+                        We use the data we collect to operate Spendly, authenticate your
+                        account, store your expenses, and present the summaries and
+                        insights you see in the app. We also use it to respond to support
+                        requests and to keep the service secure and reliable.
+                    </p>
+                    <p>
+                        We never sell your personal or financial data. We do not use your
+                        expense entries to train advertising profiles, and we do not share
+                        your information with marketers. Your data is used to provide the
+                        service to you — and only for that purpose.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="legal-section">
+            <div class="legal-icon"><span class="legal-section-icon">◰</span></div>
+            <div class="legal-section-content">
+                <h2 class="legal-section-title">3. Data Storage and Security</h2>
+                <div class="legal-section-body">
+                    <p>
+                        Your data is stored in secure databases with access restricted to
+                        authorized systems. Passwords are hashed and never stored in plain
+                        text. We use industry-standard encryption in transit (HTTPS) and
+                        apply reasonable safeguards to protect your information.
+                    </p>
+                    <p>
+                        While no system is perfectly secure, we work continuously to
+                        protect your data from unauthorized access, alteration, or
+                        destruction. You can request export or deletion of your data at
+                        any time by contacting us through the channels listed below.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="legal-section">
+            <div class="legal-icon"><span class="legal-section-icon">◊</span></div>
+            <div class="legal-section-content">
+                <h2 class="legal-section-title">4. Third-Party Services</h2>
+                <div class="legal-section-body">
+                    <p>
+                        Spendly relies on a small set of trusted third-party providers to
+                        operate — for example, hosting infrastructure and email delivery
+                        for account-related messages. These providers receive only the
+                        minimum data needed to perform their service and are bound by
+                        confidentiality and security obligations.
+                    </p>
+                    <p>
+                        We do not embed third-party advertising trackers or analytics that
+                        follow you across other websites. Any third-party integrations are
+                        listed in this policy and updated as our stack evolves.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="legal-section">
+            <div class="legal-icon"><span class="legal-section-icon">✉</span></div>
+            <div class="legal-section-content">
+                <h2 class="legal-section-title">5. Contact Us</h2>
+                <div class="legal-section-body">
+                    <p>
+                        If you have questions about this Privacy Policy, want to access or
+                        delete your data, or have any privacy-related concerns, please
+                        reach out through the support channels in the app. We read every
+                        message and respond as quickly as we can.
+                    </p>
+                    <p>
+                        Thank you for trusting Spendly with your financial data. We take
+                        that responsibility seriously.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="legal-contact">
+            <h3 class="legal-contact-title">Questions about your data?</h3>
+            <p class="legal-contact-body">
+                Reach out through the support channels in the app — we're happy to help.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

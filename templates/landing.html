@@ -20,7 +20,7 @@
         </p>
         <div class="hero-actions">
             <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
-            <a href="{{ url_for('login') }}" class="btn-primary">See how it works</a>
+            <a href="#" class="btn-primary" data-modal-open="how-it-works">See how it works</a>
         </div>
     </div>
     <div class="hero-visual">
@@ -98,5 +98,81 @@
         <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
     </div>
 </section>
+
+<div class="modal" id="modal-how-it-works" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-dialog" role="document">
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+        <div class="modal-video">
+            <iframe
+                id="how-it-works-video"
+                width="960"
+                height="540"
+                src="https://www.youtube.com/embed/-Lt-ntUDj-g?autoplay=1&rel=0"
+                title="See how Spendly works"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    const VIDEO_SRC = 'https://www.youtube.com/embed/-Lt-ntUDj-g?autoplay=1&rel=0&enablejsapi=1';
+
+    function openModal(id) {
+        const modal = document.getElementById('modal-' + id);
+        if (!modal) return;
+        const iframe = modal.querySelector('iframe');
+        if (iframe) {
+            // Always (re)assign src so the video reliably starts each time.
+            iframe.src = VIDEO_SRC;
+        }
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modal) {
+        if (!modal) return;
+        const iframe = modal.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            // Ask the YouTube player to stop.
+            iframe.contentWindow.postMessage(
+                JSON.stringify({ event: 'command', func: 'stopVideo' }),
+                '*'
+            );
+        }
+        if (iframe) {
+            // Clear src as a fallback — this also tears down the player so audio can't leak.
+            iframe.src = '';
+        }
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', function (e) {
+        const opener = e.target.closest('[data-modal-open]');
+        if (opener) {
+            e.preventDefault();
+            openModal(opener.getAttribute('data-modal-open'));
+            return;
+        }
+        const closer = e.target.closest('[data-modal-close]');
+        if (closer) {
+            e.preventDefault();
+            closeModal(closer.closest('.modal'));
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        const open = document.querySelector('.modal.is-open');
+        if (open) closeModal(open);
+    });
+})();
+</script>
 
 {% endblock %}

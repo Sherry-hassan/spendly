@@ -6,55 +6,65 @@
 
 <section class="hero">
     <div class="hero-inner">
-        <div class="hero-badge">Personal Finance Tracker</div>
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Free to use · No credit card needed
+        </div>
         <h1 class="hero-title">
-            Know where your<br>
-            <em>money goes</em>
+            Track every rupee.<br>
+            <em>Know where it goes.</em>
         </h1>
         <p class="hero-subtitle">
-            Log expenses, understand your spending patterns,
-            and take control of your financial life —
-            one transaction at a time.
+            Spendly helps you log expenses, spot patterns, and stay
+            on budget — without the spreadsheet headache.
         </p>
         <div class="hero-actions">
-            <a href="{{ url_for('register') }}" class="btn-primary">Start tracking free</a>
-            <a href="{{ url_for('login') }}" class="btn-ghost">Sign in</a>
+            <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
+            <a href="#" class="btn-primary" data-modal-open="how-it-works">See how it works</a>
         </div>
     </div>
     <div class="hero-visual">
-        <div class="mock-card">
-            <div class="mock-card-header">
-                <span class="mock-label">March 2026</span>
-                <span class="mock-total">₹12,450</span>
+        <div class="mock-dashboard">
+            <div class="mock-dots">
+                <span class="mock-dot mock-dot-1"></span>
+                <span class="mock-dot mock-dot-2"></span>
+                <span class="mock-dot mock-dot-3"></span>
             </div>
-            <div class="mock-bars">
-                <div class="mock-bar-row">
-                    <span class="mock-cat">Bills</span>
-                    <div class="mock-bar-track">
-                        <div class="mock-bar" style="width: 72%"></div>
-                    </div>
-                    <span class="mock-amt">₹4,500</span>
+            <div class="mock-tiles">
+                <div class="mock-tile">
+                    <div class="mock-tile-label">This month</div>
+                    <div class="mock-tile-value">₹18,240</div>
+                    <div class="mock-tile-meta mock-tile-meta-up">+12% vs last</div>
                 </div>
-                <div class="mock-bar-row">
-                    <span class="mock-cat">Food</span>
-                    <div class="mock-bar-track">
-                        <div class="mock-bar mock-bar-2" style="width: 52%"></div>
-                    </div>
-                    <span class="mock-amt">₹3,200</span>
+                <div class="mock-tile">
+                    <div class="mock-tile-label">Budget left</div>
+                    <div class="mock-tile-value">₹6,760</div>
+                    <div class="mock-tile-meta mock-tile-meta-good">43% remaining</div>
                 </div>
-                <div class="mock-bar-row">
-                    <span class="mock-cat">Health</span>
-                    <div class="mock-bar-track">
-                        <div class="mock-bar mock-bar-3" style="width: 33%"></div>
-                    </div>
-                    <span class="mock-amt">₹2,050</span>
+                <div class="mock-tile">
+                    <div class="mock-tile-label">Transactions</div>
+                    <div class="mock-tile-value">34</div>
+                    <div class="mock-tile-meta">this month</div>
                 </div>
-                <div class="mock-bar-row">
-                    <span class="mock-cat">Transport</span>
-                    <div class="mock-bar-track">
-                        <div class="mock-bar mock-bar-4" style="width: 28%"></div>
+            </div>
+            <div class="mock-chart">
+                <div class="mock-chart-row">
+                    <span class="mock-chart-cat">Food</span>
+                    <div class="mock-chart-track">
+                        <div class="mock-chart-bar mock-chart-bar-food" style="width: 78%"></div>
                     </div>
-                    <span class="mock-amt">₹1,800</span>
+                </div>
+                <div class="mock-chart-row">
+                    <span class="mock-chart-cat">Travel</span>
+                    <div class="mock-chart-track">
+                        <div class="mock-chart-bar mock-chart-bar-travel" style="width: 45%"></div>
+                    </div>
+                </div>
+                <div class="mock-chart-row">
+                    <span class="mock-chart-cat">Bills</span>
+                    <div class="mock-chart-track">
+                        <div class="mock-chart-bar mock-chart-bar-bills" style="width: 32%"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,5 +98,81 @@
         <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
     </div>
 </section>
+
+<div class="modal" id="modal-how-it-works" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-dialog" role="document">
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+        <div class="modal-video">
+            <iframe
+                id="how-it-works-video"
+                width="960"
+                height="540"
+                src="https://www.youtube.com/embed/-Lt-ntUDj-g?autoplay=1&rel=0"
+                title="See how Spendly works"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    const VIDEO_SRC = 'https://www.youtube.com/embed/-Lt-ntUDj-g?autoplay=1&rel=0&enablejsapi=1';
+
+    function openModal(id) {
+        const modal = document.getElementById('modal-' + id);
+        if (!modal) return;
+        const iframe = modal.querySelector('iframe');
+        if (iframe) {
+            // Always (re)assign src so the video reliably starts each time.
+            iframe.src = VIDEO_SRC;
+        }
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modal) {
+        if (!modal) return;
+        const iframe = modal.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            // Ask the YouTube player to stop.
+            iframe.contentWindow.postMessage(
+                JSON.stringify({ event: 'command', func: 'stopVideo' }),
+                '*'
+            );
+        }
+        if (iframe) {
+            // Clear src as a fallback — this also tears down the player so audio can't leak.
+            iframe.src = '';
+        }
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', function (e) {
+        const opener = e.target.closest('[data-modal-open]');
+        if (opener) {
+            e.preventDefault();
+            openModal(opener.getAttribute('data-modal-open'));
+            return;
+        }
+        const closer = e.target.closest('[data-modal-close]');
+        if (closer) {
+            e.preventDefault();
+            closeModal(closer.closest('.modal'));
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        const open = document.querySelector('.modal.is-open');
+        if (open) closeModal(open);
+    });
+})();
+</script>
 
 {% endblock %}

@@ -4,7 +4,12 @@
 
 {% block content %}
 
-<section class="hero">
+{% if welcome_message %}
+<div class="welcome-message" style="background: var(--primary-bg); color: var(--primary-fg); padding: 0.5rem 1rem; text-align: center; font-weight: 600;">
+    {{ welcome_message }}
+</div>
+{% endif %}
+
     <div class="hero-inner">
         <div class="hero-badge">
             <span class="hero-badge-dot"></span>
@@ -110,7 +115,7 @@
                 id="how-it-works-video"
                 width="960"
                 height="540"
-                src="https://www.youtube.com/embed/-Lt-ntUDj-g?autoplay=1&rel=0"
+                src=""
                 title="See how Spendly works"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, abort
-from werkzeug.security import generate_password_hash
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -13,27 +12,8 @@ def landing():
     return render_template("landing.html")
 
 
-@app.route("/register", methods=["GET", "POST"])
-
+@app.route("/register")
 def register():
-    if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        password = request.form.get("password")
-        if not all([name, email, password]):
-            abort(400, "Missing required fields")
-        conn = get_db()
-        cur = conn.cursor()
-        cur.execute("SELECT 1 FROM users WHERE email = ?", (email,))
-        if cur.fetchone():
-            abort(400, "Email already registered")
-        hashed = generate_password_hash(password)
-        cur.execute(
-            "INSERT INTO users (name, email, password_hash, created_at) VALUES (?, ?, ?, datetime('now'))",
-            (name, email, hashed),
-        )
-        conn.commit()
-        return redirect(url_for("login"))
     return render_template("register.html")
 
 
@@ -81,7 +61,7 @@ def delete_expense(id):
     return "Delete expense — coming in Step 9"
 
 
-from database.db import init_db, seed_db, get_db
+from database.db import init_db, seed_db
 
 if __name__ == "__main__":
     # Ensure database is ready before the first request
